@@ -35,9 +35,11 @@ async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/predict", response_class=HTMLResponse)
-async def predict(request: Request, content: str = Form(...)):
-    prediction = prediction_list(content)
-    return templates.TemplateResponse("index.html", {"request": request, "prediction": prediction, "email": content})
+async def predict(request: Request, short_description: str = Form(...), description: str = Form(...)):
+    if short_description == '' or description == '':
+            return templates.TemplateResponse("index.html", {"request": request, "short_description": short_description, "description": description})
+    prediction = prediction_list(short_description + description)
+    return templates.TemplateResponse("index.html", {"request": request, "prediction": prediction, "short_description": short_description, "description": description})
 
 if __name__ == '__main__':
     import uvicorn
