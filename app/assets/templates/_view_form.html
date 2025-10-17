@@ -1,0 +1,103 @@
+<h1 class="text-5xl font-bold text-center text-blue-900 mb-6 font-teko">
+  ITS Service Desk Assistant
+</h1>
+<form method="post"
+      class="bg-white rounded-2xl shadow border p-8 w-full max-w-7xl mx-auto">
+  <div class="grid grid-cols-[minmax(0,1fr)_320px] gap-x-8">
+    <section class="space-y-6 pr-6">
+        <h2 class="text-3xl font-semibold font-teko text-blue-900 mb-1 text-center">
+        Information Submission
+        </h2>
+      <!-- Ticket form -->
+      <div id="ticket-form" class="{% if input_type != 'ticket' %}hidden{% endif %}">
+        {% include "_form_ticket.html" %}
+      </div>
+
+      <!-- Call form -->
+      <div id="call-form" class="{% if input_type != 'call' %}hidden{% endif %}">
+        {% include "_form_call.html" %}
+      </div>
+
+      <!-- Actions -->
+      <div class="flex gap-4">
+        <button id="submit-btn" type="submit" class="text-blue-900 font-bold py-2 px-6 rounded-lg transition bg-yellow-400 hover:bg-cyan-500">
+              {% if workflow == "escalation" %}
+                Escalate
+              {% elif workflow == "troubleshooting" %}
+                Troubleshoot
+              {% else %}
+                Classify
+              {% endif %}
+        </button>
+        <a href="/" class="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-800 transition text-center">
+          Reset
+        </a>
+      </div>
+    </section>
+
+    <!-- Options sidebar -->
+    <aside class="border-l border-gray-200 pl-6">
+      <h2 class="text-3xl font-semibold font-teko text-blue-900 mb-1 text-center">Options</h2>
+
+      <div class="mb-6">
+        <h3 class="text-2xl font-teko font-medium text-gray-600 mb-2">Workflow</h3>
+        <div class="space-y-2">
+          <label class="flex items-center">
+            <input type="radio" name="workflow" value="troubleshooting" class="mr-2"
+                  {% if workflow == "troubleshooting" or not workflow %}checked{% endif %}>
+            Troubleshooting
+            <!-- Tooltip trigger -->
+            <div class="relative group cursor-pointer ml-2">
+              <span
+                class="flex items-center justify-center w-5 h-5 rounded-full bg-gray-200 text-gray-600 text-xs font-bold hover:bg-gray-300 hover:text-gray-800"
+              >
+                ?
+              </span>
+              <!-- Tooltip content -->
+              <div
+                class="absolute left-6 top-1/2 -translate-y-1/2 hidden group-hover:block w-64 bg-gray-800 text-white text-sm rounded px-3 py-2 shadow-lg z-10"
+              >
+                Find similar issues and analyze what might potentially need to be done.
+              </div>
+            </div>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="workflow" value="escalation" class="mr-2"
+                  {% if workflow == "escalation" %}checked{% endif %}>
+            Escalation
+            <!-- Tooltip trigger -->
+            <div class="relative group cursor-pointer ml-2">
+              <span
+                class="flex items-center justify-center w-5 h-5 rounded-full bg-gray-200 text-gray-600 text-xs font-bold hover:bg-gray-300 hover:text-gray-800"
+              >
+                ?
+              </span>
+              <!-- Tooltip content -->
+              <div
+                class="absolute left-6 top-1/2 -translate-y-1/2 hidden group-hover:block w-64 bg-gray-800 text-white text-sm rounded px-3 py-2 shadow-lg z-10"
+              >
+                Predict and explain which assignment group this issue should be routed to
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-2xl font-teko font-medium text-gray-600 mb-2">Input Type</h3>
+        <div class="space-y-2">
+          <label class="flex items-center">
+            <input type="radio" name="input_type" value="ticket" class="mr-2"
+                  {% if input_type == "ticket" or not input_type %}checked{% endif %}>
+            Ticket
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="input_type" value="call" class="mr-2"
+                  {% if input_type == "call" %}checked{% endif %}>
+            Call
+          </label>
+        </div>
+      </div>
+    </aside>
+  </div>
+</form>

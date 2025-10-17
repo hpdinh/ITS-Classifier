@@ -1,0 +1,23 @@
+<!-- _form_call.html -->
+<div id="call-form-fields">
+  <label for="systems" class="block text-gray-700 font-medium mb-2 mt-4">
+    Systems / Applications Affected:
+  </label>
+  <textarea id="systems" name="systems" rows="2"
+    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="E.g., Zoom, Outlook, VPN..." autocomplete="off">{{ systems | default('') }}</textarea>
+
+  <label for="technical_details" class="block text-gray-700 font-medium mb-2 mt-4">
+    Technical Details / Symptoms:
+  </label>
+  <textarea id="technical_details" name="technical_details" rows="6"
+    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Describe the error messages, symptoms, or observed issues..." autocomplete="off">{{ technical_details | default('') }}</textarea>
+
+  <label for="user_location" class="block text-gray-700 font-medium mb-2 mt-4">
+    User Department / Location Details:
+  </label>
+  <textarea id="user_location" name="user_location" rows="2"
+    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="E.g., ITS Helpdesk, Library Basement, San Diego Campus..." autocomplete="off">{{ user_location | default('') }}</textarea>
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ITS Service Desk Assistant</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            teko: ['Teko', 'sans-serif'],
+            source: ['"Source Sans 3"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center font-source text-lg">
+  <div class="relative w-full max-w-10xl px-6">
+    <div class="bg-white rounded-2xl shadow border p-8 w-full max-w-7xl mx-auto">
+
+
+      {% if not show_chat %}
+      {% if errors|default([]) %}
+      <script>
+        alert("{{ errors|join('\\n') }}");
+      </script>
+      {% endif %}
+        {% include "_view_form.html" %}
+      {% endif %}
+
+      {% if show_chat == True %}
+      <!-- CHAT UI -->
+        {% include "_view_chat.html" %}
+      {% endif %}
+    </div>
+  </div>
+  <script src="/static/js/chat.js"></script>
+  <script src="/static/js/form.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Given a ticket search query, retrieve relevant tickets that have the same problems.\nQuery:\n

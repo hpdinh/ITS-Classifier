@@ -1,0 +1,71 @@
+<div id="chat-container" class="flex flex-col h-[900px] max-w-7xl mx-auto">
+  <h2 class="text-2xl font-bold text-center text-blue-700 mb-4">Chat with the LLM</h2>
+
+  <!-- Hidden metadata for JS -->
+  <div id="workflow-info"
+       data-workflow="{{ workflow | default('escalation') }}"
+       data-troubleshoot="{{ troubleshoot_type | default('ticket') }}"
+       class="hidden"></div>
+
+  {% if prediction %}
+  <div id="initial-prediction"
+       data-predictions="{{ prediction | join('|') }}"
+       class="hidden"></div>
+  {% endif %}
+
+  {% if related_tickets %}
+  <div id="initial-tickets"
+        data-tickets='{{ related_tickets | tojson | safe }}'
+        class="hidden"></div>
+  {% endif %}
+
+  {% if ticket_summary %}
+  <div id="initial-ticket-summary"
+        data-ticket-summary="{{ ticket_summary }}"
+        class="hidden"></div>
+  {% endif %}
+
+
+  <div id="initial-ticket"
+       data-dept="{{ user_department | default('') }}"
+       data-short="{{ short_description | default('') }}"
+       data-desc="{{ description | default('') }}"
+       data-extra="{{ extra_info | default('') }}"
+       class="hidden"></div>
+  <div id="chat-history" data-history='{{ history|tojson }}'></div>
+  <div id="chat-init-flag" data-done="{{ 'true' if init_done else 'false' }}"></div>
+
+  <!-- Chat log -->
+  <div id="chat-log"
+       class="flex-1 bg-gray-100 p-4 rounded-lg border border-gray-300 overflow-y-auto mb-4">
+    <!-- Messages rendered here -->
+  </div>
+
+  <!-- Input row -->
+  <div class="flex gap-2">
+    <textarea id="chat-input"
+              placeholder="Ask a question..."
+              rows="1"
+              class="flex-1 resize-none p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[44px] max-h-[200px] overflow-y-auto"
+              oninput="autoResize(this)"
+              onkeydown="handleChatKey(event)"></textarea>
+    <button id="chat-send-btn"
+            onclick="sendMessage()"
+            class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition">
+      Send
+    </button>
+  </div>
+
+  <!-- Back buttons -->
+  <div class="mt-4 text-right space-x-2">
+    <a href="/reset"
+      class="inline-block bg-red-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-800 transition text-center">
+      Reset
+    </a>
+
+    <a href="/update"
+      class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition text-center">
+      Update Information
+    </a>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<!-- _form_ticket.html -->
+<div id="ticket-form-fields">
+  <label for="short_description" class="block text-gray-700 font-medium mb-2 mt-4">
+    Enter ticket short description:
+  </label>
+  <textarea id="short_description" name="short_description" rows="1"
+    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Enter your ticket here..." autocomplete="off">{{ short_description | default('') }}</textarea>
+
+  <label for="description" class="block text-gray-700 font-medium mb-2 mt-4">
+    Enter your ticket description:
+  </label>
+  <textarea id="description" name="description" rows="4"
+    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Enter your description here..." autocomplete="off">{{ description | default('') }}</textarea>
+
+  <label for="user_department" class="block text-gray-700 font-medium mb-2 mt-4">
+    User Department:
+  </label>
+  <textarea id="user_department" name="user_department" rows="1"
+    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Enter the department here..." autocomplete="off">{{ user_department | default('') }}</textarea>
+
+  <label for="extra_info" class="block text-gray-700 font-medium mb-2 mt-4">
+    Extra Information:
+  </label>
+  <textarea id="extra_info" name="extra_info" rows="2"
+    class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="Enter any helpful information..." autocomplete="off">{{ extra_info | default('') }}</textarea>
+</div>
